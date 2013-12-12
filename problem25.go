@@ -12,8 +12,7 @@ func thousand_digits(divisor, input *big.Int) bool {
 func main() {
   first_term := big.NewInt(1)
   second_term := big.NewInt(1)
-  ten := big.NewInt(10)
-  divisor := ten.Exp(big.NewInt(10), big.NewInt(999), big.NewInt(0))
+  divisor := new(big.Int).Exp(big.NewInt(10), big.NewInt(999), big.NewInt(0))
 
 
   for i := 1; ; i++ {
@@ -30,13 +29,7 @@ func main() {
       break
     }
 
-    new_first := new(big.Int)
-    new_second := new(big.Int)
-
-    new_first.Add(first_term, second_term)
-    new_second.Add(new_first, second_term)
-
-    first_term = new_first
-    second_term = new_second
+    first_term = new(big.Int).Add(first_term, second_term)
+    second_term = new(big.Int).Add(first_term, second_term)
   }
 }
